@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>UEFN Map Portfolio | Professional Map Building</title>
+  <meta name="description" content="Professional UEFN Map Building, Verse Coding, Thumbnails & Trailers. Premade maps ready to publish." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0a0a0f;
+      --card: #12121a;
+      --accent: #7c3aed;
+      --accent2: #22d3ee;
+      --text: #f1f5f9;
+      --muted: #94a3b8;
+      --yellow: #facc15;
+      --green: #4ade80;
+      --red: #f87171;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+      overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+    .container { width: min(1200px, 92%); margin: 0 auto; }
+
+    /* Header */
+    header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(10,10,15,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+    }
+    .logo {
+      font-weight: 900;
+      font-size: 1.35rem;
+      letter-spacing: -0.03em;
+      background: linear-gradient(90deg, #22d3ee, #a78bfa);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .nav-links { display: flex; gap: 1.75rem; font-size: 0.9rem; font-weight: 500; }
+    .nav-links a:hover { color: var(--accent2); }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.7rem 1.4rem;
+      border-radius: 999px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: all 0.2s;
+      border: none;
+      cursor: pointer;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, #7c3aed, #22d3ee);
+      color: #fff;
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(124,58,237,0.4); }
+    .btn-outline {
+      background: transparent;
+      border: 1.5px solid rgba(255,255,255,0.25);
+      color: #fff;
+    }
+    .btn-outline:hover { border-color: var(--accent2); color: var(--accent2); }
+
+    /* Hero */
+    .hero {
+      position: relative;
+      min-height: 92vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 6rem 0 4rem;
+      background: 
+        radial-gradient(ellipse 80% 50% at 50% -20%, rgba(124,58,237,0.25), transparent),
+        linear-gradient(180deg, #0a0a0f 0%, #0f0f18 100%);
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url('https://www.darkdiz.com/wp-content/uploads/2023/11/rainbow-1920.png') center/cover no-repeat;
+      opacity: 0.15;
+      pointer-events: none;
+    }
+    .hero-content { position: relative; z-index: 2; max-width: 800px; }
+    .hero h1 {
+      font-size: clamp(2.4rem, 6vw, 4rem);
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      line-height: 1.1;
+      margin-bottom: 1rem;
+    }
+    .hero h1 span {
+      background: linear-gradient(90deg, #22d3ee, #a78bfa, #f472b6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .hero p {
+      font-size: 1.15rem;
+      color: var(--muted);
+      margin-bottom: 2rem;
+      max-width: 560px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .hero-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+    /* Section */
+    section { padding: 5rem 0; }
+    .section-title {
+      text-align: center;
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      margin-bottom: 0.5rem;
+    }
+    .section-sub {
+      text-align: center;
+      color: var(--muted);
+      margin-bottom: 3rem;
+      font-size: 1.05rem;
+    }
+
+    /* Warning */
+    .warning {
+      background: linear-gradient(90deg, rgba(248,113,113,0.12), rgba(248,113,113,0.05));
+      border: 1px solid rgba(248,113,113,0.35);
+      border-radius: 16px;
+      padding: 1.5rem 2rem;
+      text-align: center;
+      margin: 0 auto 3rem;
+      max-width: 900px;
+    }
+    .warning strong { color: var(--red); font-size: 1.1rem; }
+    .warning p { color: var(--muted); margin-top: 0.4rem; font-size: 0.95rem; }
+
+    /* Services */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.25rem;
+    }
+    .service-card {
+      background: var(--card);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 16px;
+      padding: 1.75rem 1.5rem;
+      text-align: center;
+      transition: all 0.25s;
+    }
+    .service-card:hover {
+      border-color: rgba(124,58,237,0.5);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.3);
+    }
+    .service-card .icon { font-size: 2rem; margin-bottom: 0.75rem; }
+    .service-card h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 0.35rem; }
+    .service-card p { font-size: 0.875rem; color: var(--muted); }
+
+    /* Maps */
+    .maps-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1.5rem;
+    }
+    .map-card {
+      background: var(--card);
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.06);
+      transition: all 0.25s;
+    }
+    .map-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(34,211,238,0.4);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.35);
+    }
+    .map-card .thumb {
+      aspect-ratio: 16/9;
+      overflow: hidden;
+      background: #1a1a24;
+    }
+    .map-card .thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s;
+    }
+    .map-card:hover .thumb img { transform: scale(1.05); }
+    .map-card .body {
+      padding: 1.1rem 1.15rem 1.25rem;
+    }
+    .map-card h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 0.4rem;
+      line-height: 1.3;
+    }
+    .map-code {
+      font-family: ui-monospace, monospace;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--yellow);
+      letter-spacing: 0.02em;
+    }
+    .map-card .made-for {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-top: 0.35rem;
+    }
+
+    /* Highlight strip */
+    .highlight {
+      background: linear-gradient(90deg, #1e1b4b, #0f172a);
+      border-radius: 20px;
+      padding: 2.5rem;
+      text-align: center;
+      margin: 3rem 0;
+      border: 1px solid rgba(124,58,237,0.3);
+    }
+    .highlight h2 { font-size: 1.6rem; margin-bottom: 0.5rem; }
+    .highlight p { color: var(--muted); margin-bottom: 1.25rem; }
+
+    /* Testimonials */
+    .testimonials {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.25rem;
+    }
+    .testimonial {
+      background: var(--card);
+      border-radius: 16px;
+      padding: 1.5rem;
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+    .stars { color: var(--yellow); font-size: 0.95rem; margin-bottom: 0.6rem; }
+    .testimonial p { font-size: 0.95rem; color: #cbd5e1; margin-bottom: 0.9rem; }
+    .testimonial .author { font-weight: 600; font-size: 0.9rem; }
+
+    /* Contact */
+    .contact-box {
+      max-width: 560px;
+      margin: 0 auto;
+      background: var(--card);
+      border-radius: 20px;
+      padding: 2.5rem;
+      border: 1px solid rgba(255,255,255,0.08);
+      text-align: center;
+    }
+    .contact-box h2 { margin-bottom: 0.75rem; }
+    .contact-box p { color: var(--muted); margin-bottom: 1.5rem; }
+    .platforms {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      justify-content: center;
+      margin-top: 1.5rem;
+    }
+    .platform {
+      padding: 0.6rem 1.1rem;
+      background: rgba(255,255,255,0.05);
+      border-radius: 10px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      border: 1px solid rgba(255,255,255,0.08);
+      transition: all 0.2s;
+    }
+    .platform:hover {
+      background: rgba(124,58,237,0.2);
+      border-color: var(--accent);
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding: 2rem 0;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.875rem;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .hero { min-height: 80vh; padding-top: 5rem; }
+      section { padding: 3.5rem 0; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <a href="#" class="logo">UEFN Maps</a>
+      <nav class="nav-links">
+        <a href="#services">Services</a>
+        <a href="#maps">Maps</a>
+        <a href="#reviews">Reviews</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <a href="#contact" class="btn btn-primary">Send Inquiry</a>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Build With <span>Professionals</span></h1>
+      <p>Get free promotions of your map on site & on our socials. High-quality UEFN maps, Verse coding, thumbnails & trailers.</p>
+      <div class="hero-btns">
+        <a href="#contact" class="btn btn-primary">Send Inquiry</a>
+        <a href="#maps" class="btn btn-outline">View Premade Maps</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="services">
+    <div class="container">
+      <h2 class="section-title">Our Services</h2>
+      <p class="section-sub">Map Building · Verse Coding · Map Thumbnail & Trailer · 3D Modeling · Graphic Design</p>
+      <div class="services-grid">
+        <div class="service-card">
+          <div class="icon">🗺️</div>
+          <h3>Map Building</h3>
+          <p>Custom & premade UEFN maps ready to publish in minutes.</p>
+        </div>
+        <div class="service-card">
+          <div class="icon">💻</div>
+          <h3>Verse Coding</h3>
+          <p>Premade + custom Verse codes available to buy.</p>
+        </div>
+        <div class="service-card">
+          <div class="icon">🎬</div>
+          <h3>Thumbnail & Trailer</h3>
+          <p>High-rendered map thumbnails & lobby backgrounds.</p>
+        </div>
+        <div class="service-card">
+          <div class="icon">🎨</div>
+          <h3>3D & Design</h3>
+          <p>3D modeling and graphic design for your project.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="warning">
+        <strong>⚠️ WARNING</strong>
+        <p>There are some scammers out there showing our works & trying to scam. Be careful — make sure you contact us through our official platforms listed below.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="maps">
+    <div class="container">
+      <h2 class="section-title">Check Out Our Prebuild Maps</h2>
+      <p class="section-sub">Premade maps available now — buy & publish in 10 minutes!</p>
+
+      <div class="maps-grid">
+        <article class="map-card">
+          <div class="thumb">
+            <img src="https://www.darkdiz.com/wp-content/uploads/2023/11/rainbow-1920.png" alt="Crazy Waterpark" loading="lazy" />
+          </div>
+          <div class="body">
+            <h3>CRAZY WATERPARK 🤽</h3>
+            <div class="map-code">7326-3560-6371</div>
+          </div>
+        </article>
+
+        <article class="map-card">
+          <div class="thumb">
+            <img src="https://www.darkdiz.com/wp-content/uploads/2025/09/OG-1V1-PURE-Fire.jpg" alt="1v1 One More Time" loading="lazy" />
+          </div>
+          <div class="body">
+            <h3>1v1 ONE MORE TIME</h3>
+            <div class="map-code">7871-6740-5255</div>
+          </div>
+        </article>
+
+        <article class="map-card">
+          <div class="thumb">
+            <img src="https://www.darkdiz.com/wp-content/uploads/2025/04/TRAP-ARES-Blue.jpg" alt="Trap" loading="lazy" />
+          </div>
+          <div class="body">
+            <h3>TRAP 🏍️🔥</h3>
+            <div class="map-code">2700-9585-9098</div>
+          </div>
+        </article>
+
+        <article class="map-card">
+          <div class="thumb">
+            <img src="https://www.darkdiz.com/wp-content/uploads/2025/09/CARS-CITY-HAMMERHEAD.jpg" alt="Dont Fall" loading="lazy" />
+          </div>
+          <div class="body">
+            <h3>Dont Fall</h3>
+            <div class="map-code">4570-1276-3112</div>
+          </div>
+        </article>
+      </div>
+
+      <div class="highlight" style="margin-top: 3.5rem;">
+        <h2>NEW MAPS!</h2>
+        <p>Fresh releases ready for you</p>
+      </div>
+
+      <div class="maps-grid">
+        <article class="map-card">
+          <div class="thumb">
+            <img src="https://www.darkdiz.com/wp-content/uploads/2026/02/THUMBNAIL-711x400.jpg" alt="Tsunami Escape" loading="lazy" />
+          </div>
+          <div class="body">
+            <h3>TSUNAMI ESCAPE GLITCH BRAINROTS</h3>
+            <div class="map-code">9953-9324-7558</div>
+          </div>
+        </article>
+
+        <article class="map-card">
+          <div class="thumb">
+            <img src="https://www.darkdiz.com/wp-content/uploads/2026/02/landscape_comp_b-711x400.jpeg" alt="Drive the Brainrot City" loading="lazy" />
+          </div>
+          <div class="body">
+            <h3>DRIVE THE BRAINROT CITY</h3>
+            <div class="map-code">8521-5884-8362</div>
+          </div>
+        </article>
+
+        <article class="map-card">
+          <div class="thumb">
+            <img src="https://www.darkdiz.com/wp-content/uploads/2025/12/landscape_comp-1-711x400.jpeg" alt="Santa vs Elf" loading="lazy" />
+          </div>
+          <div class="body">
+            <h3>🎅 SANTA VS ELF 🧝</h3>
+            <div class="map-code">9276-0663-2584</div>
+          </div>
+        </article>
+
+        <article class="map-card">
+          <div class="thumb">
+            <img src="https://www.darkdiz.com/wp-content/uploads/2026/02/POWERTHUMB-Lambo3-711x400.jpg" alt="Powerwash Garden" loading="lazy" />
+          </div>
+          <div class="body">
+            <h3>POWERWASH GARDEN</h3>
+            <div class="map-code">6179-9116-9660</div>
+          </div>
+        </article>
+
+        <article class="map-card">
+          <div class="thumb">
+            <img src="https://www.darkdiz.com/wp-content/uploads/2025/12/NEW-CREATION-ELEPHANT-711x400.jpg" alt="Brainrot Ice vs Fire" loading="lazy" />
+          </div>
+          <div class="body">
+            <h3>BRAINROT ICE VS FIRE</h3>
+            <div class="map-code">3909-5206-3644</div>
+          </div>
+        </article>
+
+        <article class="map-card">
+          <div class="thumb">
+            <img src="https://www.darkdiz.com/wp-content/uploads/2025/07/sanddd-768x433.png" alt="Drift City Modes" loading="lazy" />
+          </div>
+          <div class="body">
+            <h3>DRIFT CITY MODES</h3>
+            <div class="map-code">7343-3227-3481</div>
+          </div>
+        </article>
+
+        <article class="map-card">
+          <div class="thumb">
+            <img src="https://www.darkdiz.com/wp-content/uploads/2025/05/PROMAX-Thumb-3-768x432.jpg" alt="Waves TWDU" loading="lazy" />
+          </div>
+          <div class="body">
+            <h3>WAVES - TWDU</h3>
+            <div class="map-code">3818-6205-0965</div>
+          </div>
+        </article>
+
+        <article class="map-card">
+          <div class="thumb">
+            <img src="https://www.darkdiz.com/wp-content/uploads/2025/09/THUMB-itely-MIDAS4-711x400.jpg" alt="Gorilla vs Squad" loading="lazy" />
+          </div>
+          <div class="body">
+            <h3>GORILLA 🐒 VS SQUAD 🧑‍🤝‍🧑</h3>
+            <div class="map-code">8561-8729-3834</div>
+          </div>
+        </article>
+
+        <article class="map-card">
+          <div class="thumb">
+            <img src="https://www.darkdiz.com/wp-content/uploads/2025/05/landscape_comp-711x400.jpeg" alt="Easy Obby" loading="lazy" />
+          </div>
+          <div class="body">
+            <h3>Easy Obby Parkour 500+</h3>
+            <div class="map-code">8215-4013-8252</div>
+            <div class="made-for">Made for @VoidStudiosFN</div>
+          </div>
+        </article>
+
+        <article class="map-card">
+          <div class="thumb">
+            <img src="https://www.darkdiz.com/wp-content/uploads/2025/05/NEW-MADE-thumbnail3-768x432.jpg" alt="Crazy Waterpark" loading="lazy" />
+          </div>
+          <div class="body">
+            <h3>CRAZY WATERPARK 🤽</h3>
+            <div class="map-code">7326-3560-6371</div>
+          </div>
+        </article>
+
+        <article class="map-card">
+          <div class="thumb">
+            <img src="https://www.darkdiz.com/wp-content/uploads/2026/06/SQUIDGAME-ROYAL4-711x400.jpg" alt="Baby Octo Game" loading="lazy" />
+          </div>
+          <div class="body">
+            <h3>BABY OCTO GAME</h3>
+            <div class="map-code">2526-0683-8391</div>
+          </div>
+        </article>
+
+        <article class="map-card">
+          <div class="thumb">
+            <img src="https://www.darkdiz.com/wp-content/uploads/2025/06/ThumbAi-peelyfish-711x400.jpg" alt="Sky Fights" loading="lazy" />
+          </div>
+          <div class="body">
+            <h3>SKY FIGHTS 🛩️</h3>
+            <div class="map-code">8026-7723-0492</div>
+          </div>
+        </article>
+
+        <article class="map-card">
+          <div class="thumb">
+            <img src="https://www.darkdiz.com/wp-content/uploads/2025/06/1V1-SUPER.jpg" alt="1v1 Build Fight" loading="lazy" />
+          </div>
+          <div class="body">
+            <h3>1v1 BUILD FIGHT (CRYSTAL 💎)</h3>
+            <div class="map-code">9772-1496-1625</div>
+          </div>
+        </article>
+
+        <article class="map-card">
+          <div class="thumb">
+            <img src="https://www.darkdiz.com/wp-content/uploads/2025/04/landscape_comp.jpeg" alt="Easter Parkour" loading="lazy" />
+          </div>
+          <div class="body">
+            <h3>100+ Level Easy Easter Parkour</h3>
+            <div class="map-code">5929-7521-2522</div>
+          </div>
+        </article>
+      </div>
+
+      <div class="highlight" style="margin-top: 3.5rem;">
+        <h2>More Maps</h2>
+      </div>
+
+      <div class="maps-grid">
+        <article class="map-card">
+          <div class="thumb">
+            <img src="https://www.darkdiz.com/wp-content/uploads/2025/06/PIRATESBAKE-Thumb-Day2-768x432.jpg" alt="Pirates of the Fortnite" loading="lazy" />
+          </div>
+          <div class="body">
+            <h3>Pirates Of The Fortnite 🏴‍☠️⚔️</h3>
+            <div class="map-code">8389-6921-2140</div>
+          </div>
+        </article>
+
+        <article class="map-card">
+          <div class="thumb">
+            <img src="https://www.darkdiz.com/wp-content/uploads/2025/01/IMG_0878-711x400.jpg" alt="OnlyUp" loading="lazy" />
+          </div>
+          <div class="body">
+            <h3>OnlyUp</h3>
+            <div class="map-code">4949-9869-9330</div>
+          </div>
+        </article>
+
+        <article class="map-card">
+          <div class="thumb">
+            <img src="https://www.darkdiz.com/wp-content/uploads/2024/07/Hide-and-Seek-Final-711x400.png" alt="Tilted Hide & Seek" loading="lazy" />
+          </div>
+          <div class="body">
+            <h3>Tilted HIDE & SEEK</h3>
+            <div class="map-code">9084-3198-0726</div>
+          </div>
+        </article>
+
+        <article class="map-card">
+          <div class="thumb">
+            <img src="https://www.darkdiz.com/wp-content/uploads/2025/04/BLASTER-w.jpg" alt="COD Killer" loading="lazy" />
+          </div>
+          <div class="body">
+            <h3>COD KILLER</h3>
+            <div class="map-code">1943-8817-0316</div>
+          </div>
+        </article>
+
+        <article class="map-card">
+          <div class="thumb">
+            <img src="https://www.darkdiz.com/wp-content/uploads/2025/09/ASHANDFIRE3.jpg" alt="1V1 Ash & Fire" loading="lazy" />
+          </div>
+          <div class="body">
+            <h3>1V1 ASH & FIRE ALL GUN 🔥</h3>
+            <div class="map-code">1136-9616-7108</div>
+          </div>
+        </article>
+
+        <article class="map-card">
+          <div class="thumb">
+            <img src="https://www.darkdiz.com/wp-content/uploads/2023/11/ZONEWAR2-768x432.jpg" alt="Rage Zone War" loading="lazy" />
+          </div>
+          <div class="body">
+            <h3>RAGE ZONE WAR</h3>
+            <div class="map-code">4650-8836-5548</div>
+          </div>
+        </article>
+
+        <article class="map-card">
+          <div class="thumb">
+            <img src="https://www.darkdiz.com/wp-content/uploads/2025/06/SWING-BALL-pro2-2025-711x400.jpg" alt="Swing Ball" loading="lazy" />
+          </div>
+          <div class="body">
+            <h3>SWING BALL</h3>
+            <div class="map-code">7880-9610-0680</div>
+          </div>
+        </article>
+
+        <article class="map-card">
+          <div class="thumb">
+            <img src="https://www.darkdiz.com/wp-content/uploads/2024/03/thumb-711x400.png" alt="Spongebob Tycoon" loading="lazy" />
+          </div>
+          <div class="body">
+            <h3>SPONGEBOB TYCOON</h3>
+            <div class="map-code">5323-2320-8822</div>
+          </div>
+        </article>
+
+        <article class="map-card">
+          <div class="thumb">
+            <img src="https://www.darkdiz.com/wp-content/uploads/2023/11/BMX35.jpg" alt="BMX Up" loading="lazy" />
+          </div>
+          <div class="body">
+            <h3>🏍️ BMX UP 🔥🏆</h3>
+            <div class="map-code">9090-2598-8370</div>
+          </div>
+        </article>
+
+        <article class="map-card">
+          <div class="thumb">
+            <img src="https://www.darkdiz.com/wp-content/uploads/2025/05/KILLO-Negan.jpg" alt="Haunted Hill" loading="lazy" />
+          </div>
+          <div class="body">
+            <h3>HAUNTED HILL</h3>
+            <div class="map-code">9487-6841-0307</div>
+          </div>
+        </article>
+
+        <article class="map-card">
+          <div class="thumb">
+            <img src="https://www.darkdiz.com/wp-content/uploads/2025/06/KAIJU-BATTLE2.jpg" alt="Kaiju Battle" loading="lazy" />
+          </div>
+          <div class="body">
+            <h3>KAIJU BATTLE 🦖</h3>
+            <div class="map-code">5197-8318-2716</div>
+          </div>
+        </article>
+
+        <article class="map-card">
+          <div class="thumb">
+            <img src="https://www.darkdiz.com/wp-content/uploads/2023/11/Thumbnail5.jpg" alt="Under Water Gun Game" loading="lazy" />
+          </div>
+          <div class="body">
+            <h3>UNDER WATER - GUN GAME</h3>
+            <div class="map-code">0623-1254-0715</div>
+          </div>
+        </article>
+      </div>
+
+      <div class="highlight" style="margin-top: 3.5rem;">
+        <h2>Premium Collection</h2>
+      </div>
+
+      <div class="maps-grid">
+        <article class="map-card">
+          <div class="thumb">
+            <img src="https://www.darkdiz.com/wp-content/uploads/2025/12/landscape_comp-1-768x432.jpeg" alt="Santa vs Elf" loading="lazy" />
+          </div>
+          <div class="body">
+            <h3>🎅 SANTA VS ELF 🧝</h3>
+            <div class="map-code">9276-0663-2584</div>
+          </div>
+        </article>
+
+        <article class="map-card">
+          <div class="thumb">
+            <img src="https://www.darkdiz.com/wp-content/uploads/2024/11/thumbvermax4-768x432.jpg" alt="Rainbow Slide" loading="lazy" />
+          </div>
+          <div class="body">
+            <h3>RAINBOW SLIDE AND CHILL</h3>
+            <div class="map-code">1222-7611-0194</div>
+          </div>
+        </article>
+
+        <article class="map-card">
+          <div class="thumb">
+            <img src="https://www.darkdiz.com/wp-content/uploads/2025/06/ThumbAi-peelyfish-711x400.jpg" alt="Peely vs Fishstick" loading="lazy" />
+          </div>
+          <div class="body">
+            <h3>🍌 PEELY VS FISHSTICK 🐟</h3>
+            <div class="map-code">0484-9010-2082</div>
+          </div>
+        </article>
+
+        <article class="map-card">
+          <div class="thumb">
+            <img src="https://www.darkdiz.com/wp-content/uploads/2025/01/lgun-game-vermax-768x432.jpeg" alt="First Person Gun Game" loading="lazy" />
+          </div>
+          <div class="body">
+            <h3>FIRST PERSON GUN GAME 🎯 ONE SHOT</h3>
+            <div class="map-code">1347-6844-9681</div>
+          </div>
+        </article>
+
+        <article class="map-card">
+          <div class="thumb">
+            <img src="https://www.darkdiz.com/wp-content/uploads/2025/01/land-rail-768x432.jpeg" alt="Galaxy Slide" loading="lazy" />
+          </div>
+          <div class="body">
+            <h3>GALAXY SLIDE AND CHILL</h3>
+            <div class="map-code">5471-5688-6260</div>
+          </div>
+        </article>
+      </div>
+
+      <div class="highlight" style="margin-top: 3.5rem;">
+        <h2>Offline Maps</h2>
+      </div>
+
+      <div class="maps-grid">
+        <article class="map-card">
+          <div class="thumb">
+            <img src="https://www.darkdiz.com/wp-content/uploads/2024/02/thumb.jpg" alt="Heist Tower" loading="lazy" />
+          </div>
+          <div class="body">
+            <h3>HEIST TOWER</h3>
+            <div class="map-code">2510-4733-2140</div>
+          </div>
+        </article>
+
+        <article class="map-card">
+          <div class="thumb">
+            <img src="https://www.darkdiz.com/wp-content/uploads/2025/04/landscape_comp-1.jpeg" alt="LEGO Only Up" loading="lazy" />
+          </div>
+          <div class="body">
+            <h3>LEGO Only Up</h3>
+            <div class="map-code">1699-7755-4814</div>
+          </div>
+        </article>
+
+        <article class="map-card">
+          <div class="thumb">
+            <img src="https://www.darkdiz.com/wp-content/uploads/2025/01/landscape_comp-768x432.jpeg" alt="OnlyUp 2D" loading="lazy" />
+          </div>
+          <div class="body">
+            <h3>OnlyUp 2D Map</h3>
+            <div class="map-code">6352-1440-9163</div>
+          </div>
+        </article>
+
+        <article class="map-card">
+          <div class="thumb">
+            <img src="https://www.darkdiz.com/wp-content/uploads/2023/11/BMX35.jpg" alt="OnlyUp Bike" loading="lazy" />
+          </div>
+          <div class="body">
+            <h3>OnlyUp Bike Edition 🚲</h3>
+            <div class="map-code">8860-6828-8602</div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="reviews">
+    <div class="container">
+      <h2 class="section-title">Happy Clients</h2>
+      <p class="section-sub">100+ happy clients & creators</p>
+      <div class="testimonials">
+        <div class="testimonial">
+          <div class="stars">★★★★★</div>
+          <p>“Great communication, and when changes were needed they were quick with making them. Also able to create a variety of maps and with great quality.”</p>
+          <div class="author">@Vermaxtv</div>
+        </div>
+        <div class="testimonial">
+          <div class="stars">★★★★★</div>
+          <p>“Awesome map work. They surprised me with map creation. Highly recommend, thanks!”</p>
+          <div class="author">@RelayTS</div>
+        </div>
+        <div class="testimonial">
+          <div class="stars">★★★★★</div>
+          <p>“They made perfect map for me without any issue.”</p>
+          <div class="author">@master</div>
+        </div>
+        <div class="testimonial">
+          <div class="stars">★★★★★</div>
+          <p>“Brought our vision to life. All instructions were carefully followed and completed in a timely manner. Competitive pricing as well. Highly recommended.”</p>
+          <div class="author">@seebeedits</div>
+        </div>
+        <div class="testimonial">
+          <div class="stars">★★★★★</div>
+          <p>“Incredible Work!”</p>
+          <div class="author">@brycebennett796</div>
+        </div>
+        <div class="testimonial">
+          <div class="stars">★★★★★</div>
+          <p>“Amazing work, good communication, excited to work with in the future.”</p>
+          <div class="author">@k4nyee</div>
+        </div>
+        <div class="testimonial">
+          <div class="stars">★★★★★</div>
+          <p>“Responded perfectly to my expectations and was able to adapt so that the project corresponds to me 100%. Trust them. I will order again without hesitation!”</p>
+          <div class="author">@labuchte</div>
+        </div>
+        <div class="testimonial">
+          <div class="stars">★★★★★</div>
+          <p>“This is the best map creator right here. Can 3D model and artistic abilities are amazing!! Would definitely recommend 100% if you want a large map done.”</p>
+          <div class="author">@bluemagicshaq</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="container">
+      <div class="contact-box">
+        <h2>Send Your Inquiry</h2>
+        <p>Ready to build your next map? Reach out through our official platforms.</p>
+        <a href="#contact" class="btn btn-primary" style="margin-bottom: 1.5rem;">Get Started</a>
+        <div class="platforms">
+          <a class="platform" href="https://twitter.com/mj_mapss" target="_blank" rel="noopener">Twitter / X</a>
+          <a class="platform" href="https://www.fiverr.com/s/NNxkoQN" target="_blank" rel="noopener">Fiverr</a>
+          <a class="platform" href="https://www.upwork.com/freelancers/~01834ee7b8df511a69" target="_blank" rel="noopener">Upwork</a>
+        </div>
+        <p style="margin-top: 1.75rem; font-size: 0.85rem; color: var(--muted);">
+          Verse codes available to buy + custom codes · Premade maps ready to publish in 10 minutes
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p>© 2026 UEFN Map Portfolio · Professional Map Building Services</p>
+    </div>
+  </footer>
+</body>
+</html>
